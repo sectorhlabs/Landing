@@ -1,7 +1,7 @@
 # AGENTS.md — Instructions for AI agents
 
 ## Project: Sector H Labs Landing
-Repo: `Sector-H-Labs/landing`
+Repo: `sectorhlabs/landing` on GitLab
 Vercel team: `sector-h-labs` (logged in as `sectorhlabs`)
 
 ## How to deploy to Vercel
@@ -40,11 +40,12 @@ vercel projects ls --scope sector-h-labs
 - Root directory is `.` (project root).
 - No build command or output directory needed — it's all static files.
 
-## GitHub
+## GitLab
 
-- Org: `Sector-H-Labs`
-- Use `gh repo clone Sector-H-Labs/landing` to clone
-- `git push` directly to master, no PR needed for this repo
+- Repo: `sectorhlabs/landing` on gitlab.com
+- Clone: `git clone https://gitlab.com/sectorhlabs/landing.git`
+- Push directly to `master`, no PR needed for this repo
+- Auth: credentials are stored via `git credential-store`, no setup needed
 
 ## File structure
 
