@@ -1,0 +1,24 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test snapshots
+.playwright-cli/
+output/
+
+# Dependencies (future)
+node_modules/
+
+# Secrets
+.env
+.env.local
+.env.*.local
+
+# Misc
+*.log
