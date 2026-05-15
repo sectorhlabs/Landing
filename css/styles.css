@@ -287,39 +287,6 @@ ul { list-style: none; }
 }
 .hero.lit .hero-ctas { opacity: 1; }
 
-.hero-proof {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: 500px;
-    margin-top: 34px;
-    border: 1px solid var(--line);
-    background: rgba(1,6,19,.48);
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity .8s ease 1.12s, transform .8s ease 1.12s;
-}
-.hero.lit .hero-proof { opacity: 1; transform: none; }
-.hero-proof div {
-    padding: 16px 18px;
-    border-right: 1px solid var(--line);
-}
-.hero-proof div:last-child { border-right: none; }
-.hero-proof strong {
-    display: block;
-    font-family: var(--font-sans);
-    font-size: 24px;
-    line-height: 1;
-    color: #fff;
-}
-.hero-proof span {
-    display: block;
-    margin-top: 6px;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--muted);
-}
 
 /* Buttons */
 .btn {
@@ -894,7 +861,6 @@ ul { list-style: none; }
     .hero-visual { order: -1; }
     .hero-mark { width: min(330px, 86vw); }
     .hero-logo { max-width: 330px; }
-    .hero-proof { margin-left: auto; margin-right: auto; }
     .hero-kicker { justify-content: center; }
     .hero-ctas { justify-content: center; }
 
@@ -911,21 +877,6 @@ ul { list-style: none; }
     .hero-ambient { filter: blur(20px); opacity: .25; }
     .hero { min-height: auto; padding-top: var(--nav-h); }
     .hero-split { padding-top: 36px; }
-    .hero-proof {
-        grid-template-columns: 1fr;
-        max-width: 320px;
-    }
-    .hero-proof div {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        border-right: none;
-        border-bottom: 1px solid var(--line);
-        padding: 14px 16px;
-    }
-    .hero-proof div:last-child { border-bottom: none; }
-    .hero-proof span { margin-top: 0; }
-
     .nav-toggle { display: flex; }
     .nav-links {
         position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
