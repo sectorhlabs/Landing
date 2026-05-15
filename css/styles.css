@@ -341,9 +341,9 @@ ul { list-style: none; }
     padding: 1px;
     line-height: 0;
 }
-.btn-ghost-rim:hover { background: var(--silver); }
+.btn-ghost-rim:hover { background: rgba(255,255,255,0.52); }
 .btn-ghost { clip-path: none; border: none; color: var(--silver); background: rgba(0,0,0,0.35); }
-.btn-ghost:hover { color: #fff; background: rgba(255,255,255,0.06); }
+.btn-ghost:hover { color: var(--ink); background: rgba(255,255,255,0.04); }
 
 /* ===== Section Base ===== */
 .block {
