@@ -334,8 +334,16 @@ ul { list-style: none; }
 .btn-primary:hover { background: var(--violet-2); box-shadow: 0 0 36px rgba(11,90,133,.4); }
 .btn-primary svg { transition: transform .25s; }
 .btn-primary:hover svg { transform: translateX(3px); }
-.btn-ghost { border-color: transparent; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.38); color: var(--silver); background: rgba(0,0,0,0.35); }
-.btn-ghost:hover { box-shadow: inset 0 0 0 1px var(--silver); color: #fff; background: rgba(255,255,255,0.04); }
+.btn-ghost-rim {
+    display: inline-flex;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    background: rgba(255,255,255,0.35);
+    padding: 1px;
+    line-height: 0;
+}
+.btn-ghost-rim:hover { background: var(--silver); }
+.btn-ghost { clip-path: none; border: none; color: var(--silver); background: rgba(0,0,0,0.35); }
+.btn-ghost:hover { color: #fff; background: rgba(255,255,255,0.06); }
 
 /* ===== Section Base ===== */
 .block {
