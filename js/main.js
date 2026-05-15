@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initLenis() {
+    if (typeof Lenis === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     new Lenis({
         autoRaf: true,
         lerp: 0.08,
@@ -33,12 +36,14 @@ function initNav() {
         toggle.addEventListener('click', () => {
             const expanded = toggle.getAttribute('aria-expanded') === 'true';
             toggle.setAttribute('aria-expanded', !expanded);
+            toggle.setAttribute('aria-label', expanded ? 'Abrir menú' : 'Cerrar menú');
             links.classList.toggle('active');
         });
 
         links.querySelectorAll('a').forEach(a => {
             a.addEventListener('click', () => {
                 toggle.setAttribute('aria-expanded', 'false');
+                toggle.setAttribute('aria-label', 'Abrir menú');
                 links.classList.remove('active');
             });
         });
@@ -46,6 +51,7 @@ function initNav() {
         document.addEventListener('click', (e) => {
             if (!links.contains(e.target) && !toggle.contains(e.target)) {
                 toggle.setAttribute('aria-expanded', 'false');
+                toggle.setAttribute('aria-label', 'Abrir menú');
                 links.classList.remove('active');
             }
         });
