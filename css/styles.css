@@ -334,7 +334,7 @@ ul { list-style: none; }
 .btn-primary:hover { background: var(--violet-2); box-shadow: 0 0 36px rgba(11,90,133,.4); }
 .btn-primary svg { transition: transform .25s; }
 .btn-primary:hover svg { transform: translateX(3px); }
-.btn-ghost { border: 1px solid var(--line-strong); color: var(--silver); background: rgba(0,0,0,0.35); }
+.btn-ghost { border: 1px solid rgba(255,255,255,0.38); color: var(--silver); background: rgba(0,0,0,0.35); }
 .btn-ghost:hover { border-color: var(--silver); color: #fff; background: rgba(255,255,255,0.04); }
 
 /* ===== Section Base ===== */
