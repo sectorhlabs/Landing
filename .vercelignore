@@ -1,0 +1,18 @@
+# No desplegar: borradores y material no público
+bocetoclaude.html
+tarjeta/
+.agents/
+AGENTS.md
+DESIGN.md
+skills-lock.json
+
+# Originales pesados: en producción solo se sirven los .webp
+assets/banner.png
+assets/banner.webp
+assets/gallero-home.png
+assets/logo.png
+assets/logo_sin_texto.png
+assets/logo-solo.png
+assets/recetas-mobile.png
+assets/vocapp-mobile.png
+assets/legrite-logo.png
