@@ -1036,19 +1036,36 @@ ul { list-style: none; }
 .zone-name::before { content: "▾ "; color: var(--accent-bright); }
 .zone-depth { color: var(--accent-bright); }
 
-/* Superficie · tarjetas destacadas */
-.surface-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.dcard {
-    position: relative; display: flex; flex-direction: column;
-    background: #030913; border: 1px solid var(--line); overflow: hidden;
-    clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
-    transition: transform .35s, border-color .35s, box-shadow .5s;
+/* Proyecto plegable (details/summary) — por defecto sin imágenes */
+.proj { border-bottom: 1px solid var(--line); }
+summary.node { list-style: none; cursor: pointer; border-bottom: none; }
+summary.node::-webkit-details-marker { display: none; }
+summary.node:focus-visible { background: rgba(20,144,212,.08); outline: none; }
+.node-chevron {
+    flex: none; margin-left: auto; width: 9px; height: 9px;
+    border-right: 1.6px solid var(--accent-bright); border-bottom: 1.6px solid var(--accent-bright);
+    transform: rotate(45deg); transition: transform .3s var(--ease-entry);
 }
-.dcard:hover {
-    transform: translateY(-4px); border-color: rgba(20,144,212,.45);
-    box-shadow: 0 0 0 1px rgba(20,144,212,.15), 0 22px 55px -22px rgba(11,90,133,.75);
+.proj[open] .node-chevron { transform: rotate(-135deg); }
+.proj[open] > summary.node .node-name { color: var(--accent-bright); }
+
+/* Panel expandido: media (carga al abrir) + ficha */
+.node-panel {
+    display: grid; grid-template-columns: minmax(0, 1.15fr) 1fr; gap: 26px;
+    padding: 2px 8px 30px 24px; align-items: start;
 }
-.dcard .card-media { height: 300px; }
+.proj[open] .node-panel { animation: panel-open .42s var(--ease-entry); }
+@keyframes panel-open { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+.panel-media {
+    position: relative; overflow: hidden; border: 1px solid var(--line);
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+}
+.node-panel .panel-media { height: 270px; }
+.panel-body { display: flex; flex-direction: column; gap: 14px; padding-top: 4px; }
+@media (max-width: 760px) {
+    .node-panel { grid-template-columns: 1fr; gap: 14px; padding: 2px 2px 24px; }
+    .node-panel .panel-media { height: 210px; }
+}
 
 /* Media generada para PentaLab (waveform) */
 .media-pentalab {
