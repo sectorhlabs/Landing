@@ -6,9 +6,12 @@ Vercel team: `sector-h-labs` (logged in as `sectorhlabs`)
 
 ## How to deploy to Vercel
 
-This project is NOT linked to Vercel via Git integration. Deployments are done manually via CLI.
+This project IS linked to Vercel via Git integration. **Pushing to `master` auto-deploys to
+production** (https://www.sectorhlabs.es). No CLI needed for the normal flow — just commit and push.
 
-### 1. Deploy to production
+Manual CLI deploy is only a fallback (e.g. to redeploy without a commit):
+
+### 1. Deploy to production (fallback)
 
 ```bash
 vercel --prod --scope sector-h-labs
