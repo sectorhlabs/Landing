@@ -54,15 +54,15 @@
     <div class="ocean-tint"></div>
 </div>
 
-<!-- Batímetro global: profundidad según el scroll -->
+<!-- Batímetro global: regla de profundidad a lo largo de toda la página.
+     JS posiciona cada marca en la altura real de su sección. -->
 <aside class="bathy" aria-hidden="true">
-    <span class="depth-rail"></span>
-    <span class="depth-marker"></span>
-    <span class="bathy-readout">0 m</span>
-    <span class="depth-tick" style="top:2%">0 m</span>
-    <span class="depth-tick" style="top:36%">−1500 m</span>
-    <span class="depth-tick" style="top:70%">−3000 m</span>
-    <span class="depth-tick" style="top:99%">abismo</span>
+    <span class="bathy-rail"></span>
+    <span class="bathy-tick" data-target="#home"><b>0 m</b><i>superficie</i></span>
+    <span class="bathy-tick" data-target="#capabilities"><b></b><i>qué hacemos</i></span>
+    <span class="bathy-tick" data-target="#work"><b></b><i>trabajo</i></span>
+    <span class="bathy-tick" data-target="#contact"><b></b><i>contacto</i></span>
+    <span class="bathy-tick bathy-abyss"><b>−4000 m</b><i>abismo</i></span>
 </aside>
 
 <!-- Nav -->
