@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carlos · SectorHLabs · Tarjeta personal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#1490d4;--primary-hover:#3aa6e0;
+    --ink:#e9e9ee;--ink-muted:#acacb4;--ink-subtle:#7f8794;
+    --canvas:#000408;--surface-1:#030d1c;--hairline:#13283a;--hairline-strong:#1e3a52;
+    --bleed:3mm;--safe:5mm;--doc-w:91mm;--doc-h:61mm;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:#2a2b2e;color:var(--ink);
+       -webkit-font-smoothing:antialiased;display:flex;flex-direction:column;align-items:center;gap:24px;padding:40px 16px 80px;}
+  .toolbar{position:sticky;top:0;z-index:10;display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;
+           background:rgba(1,1,2,.85);backdrop-filter:blur(8px);border:1px solid var(--hairline);border-radius:12px;padding:14px 18px;}
+  .toolbar p{font-size:13px;color:var(--ink-subtle);letter-spacing:-.1px;}
+  .btn{font:500 14px/1.2 'Inter',sans-serif;background:var(--primary);color:#fff;border:none;padding:11px 22px;border-radius:8px;cursor:pointer;transition:background .15s ease;}
+  .btn:hover{background:var(--primary-hover);}
+  .stage{display:flex;flex-direction:column;gap:32px;align-items:center;}
+  .label{font:500 11px/1.3 'JetBrains Mono',monospace;color:var(--ink-subtle);text-transform:uppercase;letter-spacing:.8px;text-align:center;margin-bottom:10px;}
+
+  .card{position:relative;width:var(--doc-w);height:var(--doc-h);background:var(--canvas);color:var(--ink);overflow:hidden;
+        border-radius:3px;box-shadow:0 24px 60px rgba(0,0,0,.55);padding:var(--bleed);}
+  .inner{position:relative;width:100%;height:100%;padding:calc(var(--safe) - var(--bleed)) 6mm;display:flex;}
+  .card::after{content:"";position:absolute;inset:0;pointer-events:none;
+        background:radial-gradient(120% 90% at 85% 110%,rgba(20,144,212,.20),transparent 60%);}
+
+  /* logo tile: cover -> llena el marco sin bandas */
+  .logo{object-fit:cover;object-position:center;border:1px solid var(--hairline);border-radius:6px;background:var(--canvas);flex:none;}
+
+  /* ---------- FRENTE ---------- */
+  .front .inner{flex-direction:column;justify-content:space-between;}
+  .front .top{display:flex;align-items:center;gap:5mm;}
+  .front .logo{width:17mm;height:17mm;}
+  .front .brand{display:flex;flex-direction:column;gap:2px;}
+  .front .brand h1{font:600 22px/1.0 'Inter',sans-serif;letter-spacing:-1px;color:var(--ink);}
+  .front .brand h1 b{color:var(--primary);font-weight:600;}
+  .front .brand .eyebrow{font:500 9px/1.3 'JetBrains Mono',monospace;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-subtle);margin-top:3px;}
+  .front .tagline{font:400 11px/1.45 'Inter',sans-serif;letter-spacing:-.1px;color:var(--ink-muted);max-width:62mm;}
+  .front .foot{display:flex;align-items:center;justify-content:space-between;}
+  .front .foot .url{font:500 10px/1 'JetBrains Mono',monospace;color:var(--ink-subtle);letter-spacing:.2px;}
+  .front .dot{width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 3px rgba(20,144,212,.22);}
+
+  /* ---------- REVERSO ---------- */
+  .back .inner{flex-direction:column;justify-content:center;gap:4mm;}
+  .back .person h2{font:600 16px/1.1 'Inter',sans-serif;letter-spacing:-.5px;color:var(--ink);}
+  .back .person .role{font:500 9px/1.3 'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;color:var(--primary);margin-top:4px;}
+  .back .rule{height:1px;background:var(--hairline);width:100%;}
+  .back .contact{display:flex;flex-direction:column;gap:2.6mm;}
+  .back .row{display:flex;align-items:center;gap:3mm;font:400 11px/1 'JetBrains Mono',monospace;color:var(--ink-muted);letter-spacing:-.2px;}
+  .back .row .ic{width:4.5mm;height:4.5mm;flex:none;color:var(--primary);}
+  .back .watermark{position:absolute;right:5mm;bottom:4.5mm;width:13mm;height:13mm;object-fit:cover;opacity:.5;border:1px solid var(--hairline);border-radius:5px;}
+
+  @page{ size:91mm 61mm; margin:0; }
+  @media print{
+    html,body{background:#fff;}
+    body{padding:0;gap:0;display:block;}
+    .toolbar,.label{display:none !important;}
+    .stage{display:block;}
+    .card{box-shadow:none;border-radius:0;width:91mm;height:61mm;page-break-after:always;break-after:page;}
+    .card:last-child{page-break-after:auto;break-after:auto;}
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar no-print">
+    <p>Tarjeta PERSONAL (Carlos) · 85×55&nbsp;mm · sangrado 3&nbsp;mm · 2 caras</p>
+    <button class="btn" onclick="window.print()">Descargar PDF</button>
+  </div>
+
+  <div class="stage">
+    <!-- FRENTE -->
+    <div>
+      <p class="label">Frente</p>
+      <div class="card front">
+        <div class="inner">
+          <div class="top">
+            <img class="logo" src="../assets/logo_sin_texto.webp" alt="SectorHLabs">
+            <div class="brand">
+              <h1>Sector<b>H</b>Labs</h1>
+              <span class="eyebrow">Developer Studio</span>
+            </div>
+          </div>
+          <p class="tagline">Construimos juegos, apps y herramientas de IA. Diseño técnico, mínimo y silenciosamente cuidado.</p>
+          <div class="foot">
+            <span class="url">www.sectorhlabs.es</span>
+            <span class="dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- REVERSO -->
+    <div>
+      <p class="label">Reverso</p>
+      <div class="card back">
+        <div class="inner">
+          <div class="person">
+            <h2>Carlos Mateos</h2>
+            <div class="role">Founder · CEO</div>
+          </div>
+          <div class="rule"></div>
+          <div class="contact">
+            <div class="row">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              sectorhlabs@proton.me
+            </div>
+            <div class="row">
+              <svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6a11.5 11.5 0 0 0 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+              github.com/sectorhlabs
+            </div>
+            <div class="row">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+              www.sectorhlabs.es
+            </div>
+          </div>
+          <img class="watermark" src="../assets/logo_sin_texto.webp" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
