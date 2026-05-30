@@ -806,11 +806,39 @@ ul { list-style: none; }
 }
 .footer-wm span { color: var(--accent-bright); }
 .footer-links { display: flex; gap: 24px; }
-.footer-links a {
-    font-family: var(--font-mono); font-size: 10px; letter-spacing: .2em;
-    text-transform: uppercase; color: var(--muted); transition: color .25s;
+
+/* Social links — el texto "rueda" hacia arriba y el icono entra desde abajo */
+.social-link {
+    --roll-h: 16px;
+    display: inline-flex;
+    height: var(--roll-h);
+    overflow: hidden;
+    color: var(--muted);
+    transition: color var(--dur-base) var(--ease-emphasis);
 }
-.footer-links a:hover { color: var(--accent-bright); }
+.social-roll {
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--dur-base) var(--ease-bounce);
+    will-change: transform;
+}
+.social-text,
+.social-icon {
+    display: flex; align-items: center; justify-content: center;
+    height: var(--roll-h); flex: none;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: .2em;
+    text-transform: uppercase; white-space: nowrap;
+}
+.social-icon svg { width: 15px; height: 15px; display: block; }
+
+.social-link:hover,
+.social-link:focus-visible { color: var(--accent-bright); outline: none; }
+.social-link:hover .social-roll,
+.social-link:focus-visible .social-roll { transform: translateY(calc(-1 * var(--roll-h))); }
+
+@media (prefers-reduced-motion: reduce) {
+    .social-roll { transition: none; }
+}
 .footer-copy {
     font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: .16em;
 }
