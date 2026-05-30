@@ -6,7 +6,31 @@ document.addEventListener('DOMContentLoaded', () => {
     initLenis();
     initNav();
     initReveal();
+    initSondeo();
 });
+
+// Profundidad del "Sondeo": actualiza --depth (0..1) según el scroll dentro de
+// la sección, para el batímetro y el parallax de rayos. Decorativo → se omite
+// con reduced-motion.
+function initSondeo() {
+    const sec = document.getElementById('work');
+    if (!sec) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let ticking = false;
+    function update() {
+        const r = sec.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const p = Math.min(1, Math.max(0, (vh - r.top) / (r.height + vh)));
+        sec.style.setProperty('--depth', p.toFixed(4));
+        ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+}
 
 function initLenis() {
     if (typeof Lenis === 'undefined') return;
