@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initReveal();
     initOceanDepth();
     initBathy();
+    initRipple();
 });
 
 const ABYSS_M = 4000; // profundidad simbólica del abismo (metros)
@@ -58,6 +59,28 @@ function initBathy() {
     window.addEventListener('load', layout);
     window.addEventListener('resize', layout, { passive: true });
     layout();
+}
+
+// Onda de agua: al pulsar la tarjeta de contacto, nacen anillos concéntricos en
+// el punto del click (efecto "gota en el agua"). Puramente decorativo → se omite
+// con reduced-motion. Los anillos se autodestruyen al terminar la animación.
+function initRipple() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const card = document.querySelector('#contact .cta-block');
+    if (!card) return;
+
+    card.addEventListener('pointerdown', (e) => {
+        const rect = card.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.left = (e.clientX - rect.left) + 'px';
+        ripple.style.top = (e.clientY - rect.top) + 'px';
+        ripple.innerHTML = '<span class="ripple-ring"></span><span class="ripple-ring"></span><span class="ripple-ring"></span>';
+        card.appendChild(ripple);
+        // delay máx (450ms) + duración máx (2050ms) + margen
+        setTimeout(() => ripple.remove(), 2600);
+    });
 }
 
 function initLenis() {
