@@ -6,30 +6,58 @@ document.addEventListener('DOMContentLoaded', () => {
     initLenis();
     initNav();
     initReveal();
-    initSondeo();
+    initOceanDepth();
+    initBathy();
 });
 
-// Profundidad del "Sondeo": actualiza --depth (0..1) según el scroll dentro de
-// la sección, para el batímetro y el parallax de rayos. Decorativo → se omite
-// con reduced-motion.
-function initSondeo() {
-    const sec = document.getElementById('work');
-    if (!sec) return;
+const ABYSS_M = 4000; // profundidad simbólica del abismo (metros)
+
+// Inmersión oceánica: actualiza --page-depth (0..1) según el scroll de toda la
+// página, alimentando el fondo de profundidad y la atmósfera. Decorativo → se
+// omite con reduced-motion (el fondo queda estático en la franja de superficie).
+function initOceanDepth() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    const root = document.documentElement;
     let ticking = false;
     function update() {
-        const r = sec.getBoundingClientRect();
-        const vh = window.innerHeight || document.documentElement.clientHeight;
-        const p = Math.min(1, Math.max(0, (vh - r.top) / (r.height + vh)));
-        sec.style.setProperty('--depth', p.toFixed(4));
+        const max = root.scrollHeight - window.innerHeight;
+        const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+        root.style.setProperty('--page-depth', p.toFixed(4));
         ticking = false;
     }
-    window.addEventListener('scroll', () => {
+    function onScroll() {
         if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-    window.addEventListener('resize', update, { passive: true });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
     update();
+}
+
+// Batímetro: la regla mide toda la página; cada marca se ancla a la posición
+// real de su sección y muestra su profundidad en metros. Se recalcula al cargar
+// (alturas finales) y al redimensionar.
+function initBathy() {
+    const bathy = document.querySelector('.bathy');
+    if (!bathy) return;
+    const ticks = bathy.querySelectorAll('.bathy-tick[data-target]');
+
+    function layout() {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        ticks.forEach(tick => {
+            const sec = document.querySelector(tick.dataset.target);
+            if (!sec) return;
+            const top = sec.offsetTop;
+            tick.style.top = top + 'px';
+            const depth = max > 0 ? Math.min(1, Math.max(0, top / max)) : 0;
+            const m = Math.round(depth * ABYSS_M / 10) * 10;
+            const label = tick.querySelector('b');
+            if (label) label.textContent = m === 0 ? '0 m' : '−' + m + ' m';
+        });
+    }
+    window.addEventListener('load', layout);
+    window.addEventListener('resize', layout, { passive: true });
+    layout();
 }
 
 function initLenis() {

@@ -42,6 +42,30 @@
 </head>
 <body>
 
+<!-- Océano: fondo de profundidad + atmósfera (toda la página) -->
+<div class="ocean" aria-hidden="true">
+    <div class="ocean-depth"></div>
+    <div class="sea-rays"></div>
+    <div class="sea-bubbles">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="ocean-snow"></div>
+    <div class="ocean-tint"></div>
+</div>
+
+<!-- Batímetro global: regla de profundidad a lo largo de toda la página.
+     JS posiciona cada marca en la altura real de su sección. -->
+<aside class="bathy" aria-hidden="true">
+    <span class="bathy-rail"></span>
+    <span class="bathy-marker"></span>
+    <span class="bathy-tick" data-target="#home"><b>0 m</b><i>superficie</i></span>
+    <span class="bathy-tick" data-target="#capabilities"><b></b><i>qué hacemos</i></span>
+    <span class="bathy-tick" data-target="#work"><b></b><i>trabajo</i></span>
+    <span class="bathy-tick" data-target="#contact"><b></b><i>contacto</i></span>
+    <span class="bathy-tick bathy-abyss"><b>−4000 m</b><i>abismo</i></span>
+</aside>
+
 <!-- Nav -->
 <nav class="nav" id="nav" role="navigation" aria-label="Navegación principal">
     <div class="container nav-container">
@@ -147,20 +171,6 @@
 
     <!-- Work -->
     <section class="block sondeo" id="work" aria-label="Trabajo y proyectos">
-        <div class="sea-rays" aria-hidden="true"></div>
-        <div class="sea-bubbles" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span>
-        </div>
-        <div class="depth-gauge" aria-hidden="true">
-            <span class="depth-rail"></span>
-            <span class="depth-marker"></span>
-            <span class="depth-tick" style="top:2%">0 m</span>
-            <span class="depth-tick" style="top:40%">−180 m</span>
-            <span class="depth-tick" style="top:72%">−600 m</span>
-            <span class="depth-tick" style="top:98%">∞</span>
-        </div>
-
         <div class="container">
             <div class="sec-head reveal">
                 <div>
