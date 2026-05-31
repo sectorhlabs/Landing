@@ -1238,6 +1238,13 @@ summary.node:focus-visible { background: rgba(20,144,212,.08); outline: none; }
     background: linear-gradient(180deg, var(--accent-bright) 0%, var(--accent) 28%, rgba(255,255,255,.05) 100%);
     opacity: .4;
 }
+.bathy-marker { /* bolita que desciende con el scroll (centro del viewport) */
+    position: absolute; left: 50%; top: calc(var(--page-depth, 0) * 100%);
+    transform: translate(-50%, -50%); width: 11px; height: 11px; border-radius: 50%;
+    background: var(--accent-bright);
+    box-shadow: 0 0 0 3px rgba(20,144,212,.18), 0 0 14px var(--accent-bright);
+    transition: top .12s linear;
+}
 .bathy-tick {
     position: absolute; left: 0; transform: translateY(-50%);
     display: flex; align-items: baseline; gap: 8px; white-space: nowrap; padding-left: 13px;
